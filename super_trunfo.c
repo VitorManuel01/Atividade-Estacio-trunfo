@@ -27,7 +27,7 @@ void gerarCarta(CartaCidade* cartacidade)
     scanf(" %c", &cartacidade->estado);
     system("cls");
 
-    printf("Escolha um numÈro de 01 a 04: ");
+    printf("Escolha um num√©ro de 01 a 04: ");
     scanf("%d", &numeroCarta);
     switch (numeroCarta)
     {
@@ -49,11 +49,11 @@ void gerarCarta(CartaCidade* cartacidade)
     scanf(" %49[^\n]", cartacidade->nomeCidade); // Reads up to 49 chars, leaving room for \0
     system("cls");
 
-    printf("Digite a populaÁ„o: ");
+    printf("Digite a popula√ß√£o: ");
     scanf("%d", &cartacidade->populacao);
     system("cls");
     
-    printf("Digite a ·rea: ");
+    printf("Digite a √°rea: ");
     scanf("%f", &cartacidade->area);
     system("cls");
     
@@ -75,13 +75,13 @@ void mostrarCartas(CartaCidade* cartacidade, int qtdCartas){
 
         printf("Estado: %c\n", cartacidade[i].estado);
         
-        printf("CÛdigo: %s\n", cartacidade[i].codigoCarta);
+        printf("C√≥digo: %s\n", cartacidade[i].codigoCarta);
         
         printf("Cidade: %s\n", cartacidade[i].nomeCidade);
         
-        printf("PopulaÁ„o: %d\n", cartacidade[i].populacao);
+        printf("Popula√ß√£o: %d\n", cartacidade[i].populacao);
         
-        printf("¡rea: %.2fm≤\n", cartacidade[i].area);
+        printf("√Årea: %.2fm¬≤\n", cartacidade[i].area);
         
         printf("PIB: R$%.2f\n", cartacidade[i].pib);
         
@@ -103,8 +103,8 @@ int main()
     int opcao;
     do {
         mostrarMenu();
-        if (scanf("%d", &opcao) != 1) { // Verifica entrada inv·lida
-            printf("Entrada inv·lida!\n");
+        if (scanf("%d", &opcao) != 1) { // Verifica entrada inv√°lida
+            printf("Entrada inv√°lida!\n");
             while (getchar() != '\n'); // Limpa buffer de entrada
             continue;
         }
@@ -116,7 +116,7 @@ int main()
                     gerarCarta(&cartacidade[qtdcartas]);
                     qtdcartas++;
                 } else {
-                    printf("N˙mero m·ximo de cartas atingido!\n");
+                    printf("N√∫mero m√°ximo de cartas atingido!\n");
                 }
                 break;
 
@@ -125,7 +125,7 @@ int main()
                 if (qtdcartas > 0) {
                     mostrarCartas(cartacidade, qtdcartas);
                 } else {
-                    printf("\nN„o h· cartas\n\n");
+                    printf("\nN√£o h√° cartas\n\n");
                 }
                 break;
 
@@ -134,8 +134,8 @@ int main()
                 break;
 
             default:
-                printf("OpÁ„o inv·lida!\n\n");
-                while (getchar() != '\n'); // Espera o usu·rio ler a mensagem
+                printf("Op√ß√£o inv√°lida!\n\n");
+                while (getchar() != '\n'); // Espera o usu√°rio ler a mensagem
                 break;
         }
 
