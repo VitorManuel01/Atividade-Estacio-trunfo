@@ -204,7 +204,7 @@ void compararPopulacao(CartaCidade *cartacidade, int qtdCartas)
     printf("\nComparação de População\n");
     for (int i = 0; i < qtdCartas; i++)
     {
-        printf("Carta %d (%s - %s): %ld habitantes\n", 
+        printf("Carta %d (%s - %s): %ld habitantes\n",
                i + 1, cartacidade[i].codigoCarta, cartacidade[i].nomeCidade, cartacidade[i].populacao);
     }
 
@@ -243,7 +243,7 @@ void compararArea(CartaCidade *cartacidade, int qtdCartas)
     printf("\nComparação de Área\n");
     for (int i = 0; i < qtdCartas; i++)
     {
-        printf("Carta %d (%s - %s): %.2f km²\n", 
+        printf("Carta %d (%s - %s): %.2f km²\n",
                i + 1, cartacidade[i].codigoCarta, cartacidade[i].nomeCidade, cartacidade[i].area);
     }
 
@@ -282,7 +282,7 @@ void compararPIB(CartaCidade *cartacidade, int qtdCartas)
     printf("\nComparação de PIB\n");
     for (int i = 0; i < qtdCartas; i++)
     {
-        printf("Carta %d (%s - %s): R$%.2f milhões\n", 
+        printf("Carta %d (%s - %s): R$%.2f milhões\n",
                i + 1, cartacidade[i].codigoCarta, cartacidade[i].nomeCidade, cartacidade[i].pib);
     }
 
@@ -322,7 +322,7 @@ void compararDensidade(CartaCidade *cartacidade, int qtdCartas)
     for (int i = 0; i < qtdCartas; i++)
     {
         calcularDensidade(&cartacidade[i]);
-        printf("Carta %d (%s - %s): %.2f hab/km²\n", 
+        printf("Carta %d (%s - %s): %.2f hab/km²\n",
                i + 1, cartacidade[i].codigoCarta, cartacidade[i].nomeCidade, cartacidade[i].densidade);
     }
 
@@ -362,7 +362,7 @@ void compararPIBPerCapita(CartaCidade *cartacidade, int qtdCartas)
     for (int i = 0; i < qtdCartas; i++)
     {
         calcularPIBPercapita(&cartacidade[i]);
-        printf("Carta %d (%s - %s): R$%.2f\n", 
+        printf("Carta %d (%s - %s): R$%.2f\n",
                i + 1, cartacidade[i].codigoCarta, cartacidade[i].nomeCidade, cartacidade[i].pib_percapita);
     }
 
@@ -426,6 +426,260 @@ void menuCompararIndividualmente(CartaCidade *cartacidade, int qtdCartas)
     }
 }
 
+void compararMultiplosAtt(CartaCidade *cartacidade, int qtdCartas)
+{
+    float atributos[2][2];
+    char nome[2][50];
+    float somaCarta1;
+    float somaCarta2;
+    char resultadoCompararacao1[50];
+    char resultadoCompararacao2[50];
+    char resultadoSoma[50];
+
+    int opc1;
+    int opc2;
+
+    system("cls");
+    printf("Escolha o primeiro atributo");
+    printf("1. Comparar População\n");
+    printf("2. Comparar Área\n");
+    printf("3. Comparar PIB\n");
+    printf("4. Comparar Densidade Populacional\n");
+    printf("5. Comparar PIB per Capita\n");
+    printf("Digite a opção: ");
+    scanf("%d", &opc1);
+
+    do
+    {
+        switch (opc1)
+        {
+        case 1:
+            strcpy(nome[0], cartacidade[0].nomeCidade);
+            strcpy(nome[1], cartacidade[1].nomeCidade);
+            atributos[0][0] = (float)cartacidade[0].populacao;
+            atributos[0][1] = (float)cartacidade[1].populacao;
+
+            if (atributos[0][0] > atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 1 venceu");
+            }
+            else if (atributos[0][0] < atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 2 venceu");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao1, "Empate!");
+            }
+            break;
+        case 2:
+            strcpy(nome[0], cartacidade[0].nomeCidade);
+            strcpy(nome[1], cartacidade[1].nomeCidade);
+            atributos[0][0] = cartacidade[0].area;
+            atributos[0][1] = cartacidade[1].area;
+            if (atributos[0][0] > atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 1 venceu");
+            }
+            else if (atributos[0][0] < atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 2 venceu");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao1, "Empate!");
+            }
+            break;
+        case 3:
+            strcpy(nome[0], cartacidade[0].nomeCidade);
+            strcpy(nome[1], cartacidade[1].nomeCidade);
+            atributos[0][0] = cartacidade[0].pib;
+            atributos[0][1] = cartacidade[1].pib;
+            if (atributos[0][0] > atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 1 venceu");
+            }
+            else if (atributos[0][0] < atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 2 venceu");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao1, "Empate!");
+            }
+            break;
+        case 4:
+            strcpy(nome[0], cartacidade[0].nomeCidade);
+            strcpy(nome[1], cartacidade[1].nomeCidade);
+            atributos[0][0] = cartacidade[0].densidade;
+            atributos[0][1] = cartacidade[1].densidade;
+            if (atributos[0][0] < atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 1 venceu");
+            }
+            else if (atributos[0][0] > atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 2 venceu");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao1, "Empate!");
+            }
+            break;
+        case 5:
+            strcpy(nome[0], cartacidade[0].nomeCidade);
+            strcpy(nome[1], cartacidade[1].nomeCidade);
+            atributos[0][0] = cartacidade[0].pib_percapita;
+            atributos[0][1] = cartacidade[1].pib_percapita;
+            if (atributos[0][0] > atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 1 venceu");
+            }
+            else if (atributos[0][0] < atributos[0][1])
+            {
+                strcpy(resultadoCompararacao1, "Carta 2 venceu");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao1, "Empate!");
+            }
+            break;
+        default:
+            printf("Opção inválida!\n");
+            break;
+        }
+    } while (opc1 < 1 || opc1 > 5);
+
+    system("cls");
+    printf("Escolha o segundo atributo");
+    if (opc1 != 1)
+        printf("1. População\n");
+    if (opc1 != 2)
+        printf("2. Área\n");
+    if (opc1 != 3)
+        printf("3. PIB\n");
+    if (opc1 != 4)
+        printf("4. Densidade Populacional\n");
+    if (opc1 != 5)
+        printf("5. PIB per Capita\n");
+    printf("Digite a opção: ");
+    scanf("%d", &opc2);
+
+    do
+    {
+        switch (opc2)
+        {
+        case 1:
+            atributos[1][0] = (float)cartacidade[0].populacao;
+            atributos[1][1] = (float)cartacidade[1].populacao;
+            if (atributos[1][0] > atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 1 venceu!");
+            }
+            else if (atributos[1][0] < atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 2 venceu!");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao2, "Empate!");
+            }
+
+            break;
+        case 2:
+            atributos[1][0] = cartacidade[0].area;
+            atributos[1][1] = cartacidade[1].area;
+            if (atributos[1][0] > atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 1 venceu!");
+            }
+            else if (atributos[1][0] < atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 2 venceu!");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao2, "Empate!");
+            }
+            break;
+        case 3:
+            atributos[1][0] = cartacidade[0].pib;
+            atributos[1][1] = cartacidade[1].pib;
+            if (atributos[1][0] > atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 1 venceu!");
+            }
+            else if (atributos[1][0] < atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 2 venceu!");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao2, "Empate!");
+            }
+            break;
+        case 4:
+            atributos[1][0] = cartacidade[0].densidade;
+            atributos[1][1] = cartacidade[1].densidade;
+            if (atributos[1][0] < atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 1 venceu!");
+            }
+            else if (atributos[1][0] > atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 2 venceu!");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao2, "Empate!");
+            }
+            break;
+        case 5:
+            atributos[1][0] = cartacidade[0].pib_percapita;
+            atributos[1][1] = cartacidade[1].pib_percapita;
+            if (atributos[1][0] > atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 1 venceu!");
+            }
+            else if (atributos[1][0] < atributos[1][1])
+            {
+                strcpy(resultadoCompararacao2, "Carta 2 venceu!");
+            }
+            else
+            {
+                strcpy(resultadoCompararacao2, "Empate!");
+            }
+            break;
+        default:
+            printf("Opção inválida!\n");
+            break;
+        }
+    } while (opc2 != opc1 && (opc2 < 1 || opc2 > 5));
+
+    somaCarta1 = atributos[0][0] + atributos[1][0];
+    somaCarta2 = atributos[0][1] + atributos[1][1];
+
+    if (somaCarta1 > somaCarta2)
+    {
+        strcpy(resultadoSoma, "Carta 1 venceu a rodada");
+    }
+    else if (somaCarta1 < somaCarta2)
+    {
+        strcpy(resultadoSoma, "Carta 2 venceu a rodada");
+    }
+    else
+    {
+        strcpy(resultadoSoma, "Empate!");
+    }
+
+    system("cls");
+    printf("\nResultado da Comparação:\n");
+    printf("Carta 1: %s\nCarta 2: %s\n", nome[0], nome[1]);
+    printf("Atributo 1: %.2f vs %.2f - %s\n", atributos[0][0], atributos[0][1], resultadoCompararacao1);
+    printf("Atributo 2: %.2f vs %.2f - %s\n", atributos[1][0], atributos[1][1], resultadoCompararacao2);
+    printf("Soma: %.2f vs %.2f - %s\n", somaCarta1, somaCarta2, resultadoSoma);
+}
+
 int main()
 {
     system("cls");
@@ -441,7 +695,8 @@ int main()
         if (scanf("%d", &opcao) != 1)
         {
             printf("Entrada inválida!\n");
-            while (getchar() != '\n');
+            while (getchar() != '\n')
+                ;
             continue;
         }
 
@@ -478,15 +733,19 @@ int main()
             break;
 
         case 4:
+            compararMultiplosAtt(cartacidade, qtdcartas);
+            break;
+        case 5:
             printf("Saindo...\n");
             break;
 
         default:
             printf("Opção inválida!\n\n");
-            while (getchar() != '\n');
+            while (getchar() != '\n')
+                ;
             break;
         }
-    } while (opcao != 4);
+    } while (opcao != 5);
 
     return 0;
 }
