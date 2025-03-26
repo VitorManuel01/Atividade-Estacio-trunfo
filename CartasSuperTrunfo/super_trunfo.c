@@ -209,14 +209,27 @@ void compararPopulacao(CartaCidade *cartacidade, int qtdCartas)
     }
 
     int maiorIndicePopulacao = 0;
+    int empates = 0;
     for (int i = 1; i < qtdCartas; i++)
     {
         if (cartacidade[i].populacao > cartacidade[maiorIndicePopulacao].populacao)
         {
             maiorIndicePopulacao = i;
+            empates = 0;
+        }
+        else if (cartacidade[i].populacao == cartacidade[maiorIndicePopulacao].populacao)
+        {
+            empates++;
         }
     }
-    printf("Resultado: A Carta %d venceu!\n\n", maiorIndicePopulacao + 1);
+    if (empates > 0)
+    {
+        printf("Resultado: Empate!\n\n");
+    }
+    else
+    {
+        printf("Resultado: A Carta %d venceu!\n\n", maiorIndicePopulacao + 1);
+    }
 }
 
 void compararArea(CartaCidade *cartacidade, int qtdCartas)
@@ -235,14 +248,27 @@ void compararArea(CartaCidade *cartacidade, int qtdCartas)
     }
 
     int maiorIndiceArea = 0;
+    int empates = 0;
     for (int i = 1; i < qtdCartas; i++)
     {
         if (cartacidade[i].area > cartacidade[maiorIndiceArea].area)
         {
             maiorIndiceArea = i;
+            empates = 0;
+        }
+        else if (cartacidade[i].area == cartacidade[maiorIndiceArea].area)
+        {
+            empates++;
         }
     }
-    printf("Resultado: A Carta %d venceu!\n\n", maiorIndiceArea + 1);
+    if (empates > 0)
+    {
+        printf("Resultado: Empate!\n\n");
+    }
+    else
+    {
+        printf("Resultado: A Carta %d venceu!\n\n", maiorIndiceArea + 1);
+    }
 }
 
 void compararPIB(CartaCidade *cartacidade, int qtdCartas)
@@ -261,14 +287,27 @@ void compararPIB(CartaCidade *cartacidade, int qtdCartas)
     }
 
     int maiorIndicePIB = 0;
+    int empates = 0;
     for (int i = 1; i < qtdCartas; i++)
     {
         if (cartacidade[i].pib > cartacidade[maiorIndicePIB].pib)
         {
             maiorIndicePIB = i;
+            empates = 0;
+        }
+        else if (cartacidade[i].pib == cartacidade[maiorIndicePIB].pib)
+        {
+            empates++;
         }
     }
-    printf("Resultado: A Carta %d venceu!\n\n", maiorIndicePIB + 1);
+    if (empates > 0)
+    {
+        printf("Resultado: Empate!\n\n");
+    }
+    else
+    {
+        printf("Resultado: A Carta %d venceu!\n\n", maiorIndicePIB + 1);
+    }
 }
 
 void compararDensidade(CartaCidade *cartacidade, int qtdCartas)
@@ -288,14 +327,27 @@ void compararDensidade(CartaCidade *cartacidade, int qtdCartas)
     }
 
     int menorIndiceDensidade = 0;
+    int empates = 0;
     for (int i = 1; i < qtdCartas; i++)
     {
         if (cartacidade[i].densidade < cartacidade[menorIndiceDensidade].densidade)
         {
             menorIndiceDensidade = i;
+            empates = 0;
+        }
+        else if (cartacidade[i].densidade == cartacidade[menorIndiceDensidade].densidade)
+        {
+            empates++;
         }
     }
-    printf("Resultado: A Carta %d venceu!\n\n", menorIndiceDensidade + 1);
+    if (empates > 0)
+    {
+        printf("Resultado: Empate!\n\n");
+    }
+    else
+    {
+        printf("Resultado: A Carta %d venceu!\n\n", menorIndiceDensidade + 1);
+    }
 }
 
 void compararPIBPerCapita(CartaCidade *cartacidade, int qtdCartas)
@@ -315,21 +367,34 @@ void compararPIBPerCapita(CartaCidade *cartacidade, int qtdCartas)
     }
 
     int maiorIndicePibPerCapita = 0;
+    int empates = 0;
     for (int i = 1; i < qtdCartas; i++)
     {
         if (cartacidade[i].pib_percapita > cartacidade[maiorIndicePibPerCapita].pib_percapita)
         {
             maiorIndicePibPerCapita = i;
+            empates = 0;
+        }
+        else if (cartacidade[i].pib_percapita == cartacidade[maiorIndicePibPerCapita].pib_percapita)
+        {
+            empates++;
         }
     }
-    printf("Resultado: A Carta %d venceu!\n\n", maiorIndicePibPerCapita + 1);
+    if (empates > 0)
+    {
+        printf("Resultado: Empate!\n\n");
+    }
+    else
+    {
+        printf("Resultado: A Carta %d venceu!\n\n", maiorIndicePibPerCapita + 1);
+    }
 }
 
 void menuCompararIndividualmente(CartaCidade *cartacidade, int qtdCartas)
 {
     int opc;
     system("cls");
-    printf("=== Comparação Individual ===\n");
+    printf("=== Menu de Comparação Individual ===\n");
     printf("1. Comparar População\n");
     printf("2. Comparar Área\n");
     printf("3. Comparar PIB\n");
