@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <string.h>
 
-typedef struct
+typedef struct // Definindo a estrutura da carta
 {
     char estado;
     char codigoCarta[5];
@@ -17,12 +17,19 @@ typedef struct
     float superPoder;
 } CartaCidade;
 
-void mostrarMenu()
+void mostrarMenu() // Função para exibir o menu principal
 {
-    printf("Digite 1 para cadastrar uma carta\nDigite 2 para mostrar cartas\nDigite 3 para comparar individualmente\nDigite 4 para sair\n\n\nDigitar: ");
+    system("cls");
+    printf("=== Menu Principal ===\n\n");
+    printf("1. Cadastrar Carta\n");
+    printf("2. Mostrar Cartas\n");
+    printf("3. Comparar Individualmente\n");
+    printf("4. Comparar Múltiplos Atributos\n");
+    printf("5. Sair\n\n");
+    printf("Escolha uma opção: ");
 }
 
-void gerarCarta(CartaCidade *cartacidade)
+void gerarCarta(CartaCidade *cartacidade) // Função para gerar uma nova carta
 {
     int numeroCarta;
     printf("Digite uma letra de A a H para representar o estado: ");
@@ -34,7 +41,7 @@ void gerarCarta(CartaCidade *cartacidade)
     switch (numeroCarta)
     {
     case 1:
-        sprintf(cartacidade->codigoCarta, "%c01", cartacidade->estado);
+        sprintf(cartacidade->codigoCarta, "%c01", cartacidade->estado); // Formata o código da carta com o estado e o número
         break;
     case 2:
         sprintf(cartacidade->codigoCarta, "%c02", cartacidade->estado);
@@ -48,15 +55,15 @@ void gerarCarta(CartaCidade *cartacidade)
     }
 
     printf("Digite a cidade: ");
-    scanf(" %49[^\n]", cartacidade->nomeCidade);
+    scanf(" %49[^\n]", cartacidade->nomeCidade); // Lê até 49 caracteres e ignora o '\n'
     system("cls");
 
     printf("Digite a população: ");
-    scanf("%ld", &cartacidade->populacao);
+    scanf("%ld", &cartacidade->populacao); // Lê a população como um número inteiro longo
     system("cls");
 
     printf("Digite a área: ");
-    scanf("%f", &cartacidade->area);
+    scanf("%f", &cartacidade->area); // Lê a área como um número de ponto flutuante
     system("cls");
 
     printf("Digite o PIB em milhões: ");
@@ -67,22 +74,22 @@ void gerarCarta(CartaCidade *cartacidade)
     scanf("%d", &cartacidade->nPontosTuristicos);
     system("cls");
 
-    printf("Carta gerada com sucesso\n\n\n");
+    printf("Carta gerada com sucesso\n\n\n"); // Armazenando os dados na estrutura
 }
 
-float calcularDensidade(CartaCidade *cartacidade)
+float calcularDensidade(CartaCidade *cartacidade) // Função para calcular a densidade populacional
 {
-    if (cartacidade->area == 0)
+    if (cartacidade->area == 0) // Evita divisão por zero
     {
         return 0;
     }
-    cartacidade->densidade = cartacidade->populacao / cartacidade->area;
-    return cartacidade->densidade;
+    cartacidade->densidade = cartacidade->populacao / cartacidade->area; // Calcula a densidade
+    return cartacidade->densidade; // Retorna a densidade calculada armazenada na estrutura
 }
 
 float calcularPIBPercapita(CartaCidade *cartacidade)
 {
-    cartacidade->pib_percapita = (cartacidade->pib * 1000) / cartacidade->populacao;
+    cartacidade->pib_percapita = (cartacidade->pib * 1000) / cartacidade->populacao; // Calcula o PIB per capita com os dados salvos na estrutura
     return cartacidade->pib_percapita;
 }
 
@@ -118,11 +125,12 @@ void compararCartas(CartaCidade *cartacidade, int qtdCartas)
     }
 
     printf("Comparação de Cartas\n");
+    //Itera a estrutura para comparar as cartas
 
     int maiorIndicePopulacao = 0;
     for (int i = 1; i < qtdCartas; i++)
     {
-        if (cartacidade[i].populacao > cartacidade[maiorIndicePopulacao].populacao)
+        if (cartacidade[i].populacao > cartacidade[maiorIndicePopulacao].populacao) 
         {
             maiorIndicePopulacao = i;
         }
@@ -184,7 +192,7 @@ void compararCartas(CartaCidade *cartacidade, int qtdCartas)
     int maiorIndiceSuperPoder = 0;
     for (int i = 1; i < qtdCartas; i++)
     {
-        calcularSuperPoder(&cartacidade[i]);
+        calcularSuperPoder(&cartacidade[i]); // Itera a estrutura com para calcular o super poder das cartas e comparar
         if (cartacidade[i].superPoder > cartacidade[maiorIndiceSuperPoder].superPoder)
         {
             maiorIndiceSuperPoder = i;
@@ -205,12 +213,13 @@ void compararPopulacao(CartaCidade *cartacidade, int qtdCartas)
     for (int i = 0; i < qtdCartas; i++)
     {
         printf("Carta %d (%s - %s): %ld habitantes\n",
-               i + 1, cartacidade[i].codigoCarta, cartacidade[i].nomeCidade, cartacidade[i].populacao);
+               i + 1, cartacidade[i].codigoCarta, cartacidade[i].nomeCidade, cartacidade[i].populacao); // Exibe os dados da carta 
     }
 
     int maiorIndicePopulacao = 0;
     int empates = 0;
-    for (int i = 1; i < qtdCartas; i++)
+    for (int i = 1; i < qtdCartas; i++) // Itera a estrutura para comparar as cartas salvando também os empates
+    // e o maior índice de população
     {
         if (cartacidade[i].populacao > cartacidade[maiorIndicePopulacao].populacao)
         {
@@ -428,13 +437,16 @@ void menuCompararIndividualmente(CartaCidade *cartacidade, int qtdCartas)
 
 void compararMultiplosAtt(CartaCidade *cartacidade, int qtdCartas)
 {
-    float atributos[2][2];
+    float atributos[2][2]; // Array para armazenar os atributos das cartas
+    // Atributos: 0 - Carta 1, 1 - Carta 2        
     char nome[2][50];
-    float somaCarta1;
-    float somaCarta2;
-    char resultadoCompararacao1[50];
-    char resultadoCompararacao2[50];
-    char resultadoSoma[50];
+    // Array para armazenar os nomes das cartas
+    // Atributos: 0 - Carta 1, 1 - Carta 2
+    float somaCarta1; // Variável para armazenar a soma dos atributos da carta 1
+    float somaCarta2; // Variável para armazenar a soma dos atributos da carta 2
+    char resultadoCompararacao1[50]; // Variável para armazenar o resultado da comparação do primeiro atributo
+    char resultadoCompararacao2[50]; // Variável para armazenar o resultado da comparação do segundo atributo
+    char resultadoSoma[50]; // Variável para armazenar o resultado da soma dos atributos
 
     int opc1;
     int opc2;
@@ -454,12 +466,13 @@ void compararMultiplosAtt(CartaCidade *cartacidade, int qtdCartas)
         switch (opc1)
         {
         case 1:
-            strcpy(nome[0], cartacidade[0].nomeCidade);
+            strcpy(nome[0], cartacidade[0].nomeCidade); // Copia o nome da cidade para o array
+            // A função strcpy copia a string de origem para o destino
             strcpy(nome[1], cartacidade[1].nomeCidade);
-            atributos[0][0] = (float)cartacidade[0].populacao;
-            atributos[0][1] = (float)cartacidade[1].populacao;
+            atributos[0][0] = (float)cartacidade[0].populacao; // Atribui o valor da população da carta 1
+            atributos[0][1] = (float)cartacidade[1].populacao; // Atribui o valor da população da carta 2
 
-            if (atributos[0][0] > atributos[0][1])
+            if (atributos[0][0] > atributos[0][1]) 
             {
                 strcpy(resultadoCompararacao1, "Carta 1 venceu");
             }
@@ -473,7 +486,7 @@ void compararMultiplosAtt(CartaCidade *cartacidade, int qtdCartas)
             }
             break;
         case 2:
-            strcpy(nome[0], cartacidade[0].nomeCidade);
+            strcpy(nome[0], cartacidade[0].nomeCidade); 
             strcpy(nome[1], cartacidade[1].nomeCidade);
             atributos[0][0] = cartacidade[0].area;
             atributos[0][1] = cartacidade[1].area;
@@ -551,8 +564,8 @@ void compararMultiplosAtt(CartaCidade *cartacidade, int qtdCartas)
     } while (opc1 < 1 || opc1 > 5);
 
     system("cls");
-    printf("Escolha o segundo atributo");
-    if (opc1 != 1)
+    printf("Escolha o segundo atributo"); // Exibe o menu para escolher o segundo atributo
+    if (opc1 != 1) // evita repetir o primeiro atributo e assim por diante
         printf("1. População\n");
     if (opc1 != 2)
         printf("2. Área\n");
@@ -656,8 +669,8 @@ void compararMultiplosAtt(CartaCidade *cartacidade, int qtdCartas)
         }
     } while (opc2 != opc1 && (opc2 < 1 || opc2 > 5));
 
-    somaCarta1 = atributos[0][0] + atributos[1][0];
-    somaCarta2 = atributos[0][1] + atributos[1][1];
+    somaCarta1 = atributos[0][0] + atributos[1][0]; // Soma os atributos da carta 1
+    somaCarta2 = atributos[0][1] + atributos[1][1]; // Soma os atributos da carta 2
 
     if (somaCarta1 > somaCarta2)
     {
@@ -673,6 +686,7 @@ void compararMultiplosAtt(CartaCidade *cartacidade, int qtdCartas)
     }
 
     system("cls");
+    // mostra tudo que foi comparado
     printf("\nResultado da Comparação:\n");
     printf("Carta 1: %s\nCarta 2: %s\n", nome[0], nome[1]);
     printf("Atributo 1: %.2f vs %.2f - %s\n", atributos[0][0], atributos[0][1], resultadoCompararacao1);
@@ -683,15 +697,18 @@ void compararMultiplosAtt(CartaCidade *cartacidade, int qtdCartas)
 int main()
 {
     system("cls");
-    setlocale(LC_ALL, "portuguese_brazil");
+    setlocale(LC_ALL, "portuguese_brazil"); // Definindo o locale para português do Brasil
+    printf("=== Jogo Super Trunfo ===\n\n");
 
-    CartaCidade cartacidade[5];
-    int qtdcartas = 0;
-    int opcao;
+    CartaCidade cartacidade[5]; // Array para armazenar até 5 cartas
+    // Inicializando as cartas com valores padrão
+    int qtdcartas = 0; // Contador de cartas cadastradas
+    int opcao; // Variável para armazenar a opção do menu
+    // Definindo valores padrão para as cartas
 
-    do
+    do // Loop principal do menu
     {
-        mostrarMenu();
+        mostrarMenu(); // Exibindo o menu de opções
         if (scanf("%d", &opcao) != 1)
         {
             printf("Entrada inválida!\n");
@@ -700,10 +717,10 @@ int main()
             continue;
         }
 
-        switch (opcao)
+        switch (opcao) // Verificando a opção escolhida pelo usuário
         {
         case 1:
-            if (qtdcartas < 5)
+            if (qtdcartas < 5) // Verificando se ainda há espaço para cadastrar mais cartas
             {
                 system("cls");
                 gerarCarta(&cartacidade[qtdcartas]);
